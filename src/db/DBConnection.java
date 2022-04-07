@@ -19,7 +19,7 @@ public class DBConnection {
 	private static final String userName = "DMA-CSD-S211_10407521";
 	private static final String password = "Password1!";
 	
-	private DBConnection() {
+	public DBConnection() {
 		String connectionString = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s;encrypt=false", 
 				serverAddress, serverPort, dbName, userName, password);
 		try {

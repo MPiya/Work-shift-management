@@ -10,7 +10,7 @@ import model.Employee;
 
 	public class ShiftController {
 	private ShiftDB shiftController;
-	private ShiftController () throws DataAccessException {
+	public ShiftController () throws DataAccessException {
 		 shiftController  = new ShiftDB();
 	}
 	

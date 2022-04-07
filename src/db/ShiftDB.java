@@ -28,8 +28,7 @@ private PreparedStatement insertShiftDB;
 	}
 					//Set shift with these arguments
 	public void setShift( String startTime, String endTime, int employeeID) throws SQLException {
-		
-		
+
 		insertShiftDB.setString(1,startTime);
 		insertShiftDB.setString(2,endTime);
 		insertShiftDB.setInt(3,employeeID);
