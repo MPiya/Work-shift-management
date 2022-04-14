@@ -1,12 +1,12 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.GridLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -25,17 +25,35 @@ import java.awt.Button;
 import java.awt.Canvas;
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import db.DBConnection;
 
-public class SetShiftGUI extends JFrame {
-
+public class SetShiftGUI  extends JFrame {
+	private static final String selectAllQ = "select Employee.FirstName, Employee.LastName, Shift.StartTime, Shift.Endtime, SHIFT.Totalhour,Employee.EmployeeID\r\n"
+			+ "FROM Shift\r\n"
+			+ "INNER JOIN Employee ON SHIFT.EmployeeID = Employee.EmployeeID";
+	private PreparedStatement selectAll ;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField startTime;
 	private JTextField endTime;
 	private JTextField employee;
 	private JTextField location;
+	private JTable tblData;
+	private JButton Shift;
+	private JScrollPane scrollPane_1;
 
 	/**
 	 * Launch the application.
@@ -56,17 +74,18 @@ public class SetShiftGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SetShiftGUI() {
+	public SetShiftGUI() throws SQLException {
+		selectAll = DBConnection.getInstance().getConnection().prepareStatement(selectAllQ); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 670, 457);
+		setBounds(100, 100, 864, 520);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("         Set shift");
+		JLabel lblNewLabel = new JLabel("   Shift Menu");
 		lblNewLabel.setBackground(Color.CYAN);
-		lblNewLabel.setBounds(46, 65, 106, 60);
+		lblNewLabel.setBounds(65, 61, 133, 60);
 		contentPane.add(lblNewLabel);
 		
 		startTime = new JTextField();
@@ -87,7 +106,7 @@ public class SetShiftGUI extends JFrame {
 		employee.setText("Insert ID of Employee");
 		employee.setColumns(10);
 		// work fine
-		JButton btnNewButton = new JButton("Set");
+		JButton btnNewButton = new JButton("Set shift");
 		btnNewButton.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e) {
 				ShiftController shiftcontroller;
@@ -96,6 +115,7 @@ public class SetShiftGUI extends JFrame {
 				String c = employee.getText();
 				int toId = Integer.parseInt(c);
 				try {
+					// format is yyyy-mm-dd hh:mm e.g. 2020-02-05 10:00
 					shiftcontroller = new ShiftController();
 					shiftcontroller.setShift(a,b,toId);
 
@@ -107,7 +127,7 @@ public class SetShiftGUI extends JFrame {
 
 					}
 		});
-		btnNewButton.setBounds(60, 291, 47, 21);
+		btnNewButton.setBounds(60, 291, 92, 29);
 		contentPane.add(btnNewButton);
 		
 		location = new JTextField();
@@ -115,5 +135,71 @@ public class SetShiftGUI extends JFrame {
 		location.setColumns(10);
 		location.setBounds(30, 237, 149, 29);
 		contentPane.add(location);
+		
+		JButton btnNewButton_1 = new JButton("Back");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainMenu main = new MainMenu();
+				main.setVisible(true);
+			}
+		});
+		btnNewButton_1.setBounds(10, 389, 97, 21);
+		contentPane.add(btnNewButton_1);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(239, 36, 566, 404);
+		contentPane.add(scrollPane_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane_1.setColumnHeaderView(scrollPane);
+		
+		tblData = new JTable();
+		scrollPane.setViewportView(tblData);
+		
+		JButton btnNewButton_1_1 = new JButton("Back");
+		btnNewButton_1_1.setBounds(22, 389, 85, 21);
+		contentPane.add(btnNewButton_1_1);
+		
+		Shift = new JButton("Display");
+		Shift.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					ResultSet rs = selectAll.executeQuery();
+					ResultSetMetaData rsmd = rs.getMetaData();
+					DefaultTableModel model= (DefaultTableModel) tblData.getModel();
+					int column = rsmd.getColumnCount();
+					String[] colName = new String[column];
+					
+					for( int i = 0; i < column; i++) {
+						colName[i]=rsmd.getColumnName(i+1);
+						model.setColumnIdentifiers(colName);
+						
+						String a, b,c,d,f,g;
+						while(rs.next()) {
+							a = rs.getString(1);
+							b = rs.getString(2);
+							c = rs.getString(3);
+							d = rs.getString(4);
+							f = rs.getString(5);
+							g = rs.getString(6);
+							String[] row = {a,b,c,d,f,g};
+							model.addRow(row);
+									}
+					} }
+				
+				
+				catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		Shift.setBounds(113, 389, 85, 21);
+		contentPane.add(Shift);
+		
+		JLabel lblNewLabel_1 = new JLabel("Record");
+		lblNewLabel_1.setBounds(471, 10, 45, 13);
+		contentPane.add(lblNewLabel_1);
 	}
 }

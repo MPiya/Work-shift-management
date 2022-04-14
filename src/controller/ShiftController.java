@@ -9,17 +9,24 @@ import db.ShiftDBIF;
 import model.Employee;
 
 	public class ShiftController {
-	private ShiftDB shiftController;
+	private ShiftDBIF shiftDatabase;
+	
 	public ShiftController () throws DataAccessException {
-		 shiftController  = new ShiftDB();
+		shiftDatabase = new ShiftDB();
 	}
 	
 	public void setShift(String startTime, String endTime, int employeeID) throws SQLException {
-		shiftController.setShift(startTime, endTime, employeeID);
+		shiftDatabase.setShift(startTime, endTime, employeeID);
+	}
+	
+	public  int calculateTotalHoursBetweenDates(int id, String day0, String day1) throws SQLException, DataAccessException {
+		int totalhours = shiftDatabase.calculateTotalHoursBetweenDates(id, day0, day1);
+		 return totalhours;
+	}
+	
+	public void deleteShift(String deleteWantedTime, int customerID) throws SQLException {
+		shiftDatabase.deleteShift(deleteWantedTime, customerID);
 	}
 
-	public static void main(String[] args) throws SQLException, DataAccessException {
-		ShiftController a = new ShiftController();
-		a.setShift( "2022-12-30 10:10", " 2022-12-31 23:11", 1);
-	}
+	
 }

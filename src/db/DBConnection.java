@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBConnection {
-	private Connection connection = null;
+	private static Connection connection = null;
 	private static DBConnection dbConnection;
 	
 	private static final String driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -19,7 +19,7 @@ public class DBConnection {
 	private static final String userName = "DMA-CSD-S211_10407521";
 	private static final String password = "Password1!";
 	
-	public DBConnection() {
+	private DBConnection() {
 		String connectionString = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s;encrypt=false", 
 				serverAddress, serverPort, dbName, userName, password);
 		try {

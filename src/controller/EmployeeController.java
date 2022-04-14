@@ -16,6 +16,12 @@ public class EmployeeController {
 		employee.createEmployeeinDB(fname,  lname,  address,  phoneno);
 	}
 	
+	public void updatePhoneAndAddress(String address, String phone, int customerID) throws SQLException {
+		employee.updatePhoneAndAddress(address,phone,customerID);
+	}
+	public void deleteEmployee(int id) throws SQLException {
+		employee.deleteEmployee(id);
+	}
 	
 
 }
