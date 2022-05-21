@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class MainMenu extends JFrame {
 
@@ -39,7 +40,7 @@ public class MainMenu extends JFrame {
 	 */
 	public MainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 547, 312);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,7 +78,7 @@ public class MainMenu extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(147, 115, 112, 39);
+		btnNewButton_1.setBounds(162, 113, 144, 42);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Delete Shift");
@@ -87,19 +88,29 @@ public class MainMenu extends JFrame {
 				shift.setVisible(true);
 			}
 		});
-		btnNewButton_2.setBounds(279, 112, 112, 45);
+		btnNewButton_2.setBounds(335, 112, 112, 45);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Employee menu");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				EmployeeMenu main = new EmployeeMenu();
-				main.setVisible(true);
+				EmployeeMenu main;
+				try {
+					main = new EmployeeMenu();
+					main.setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
-		btnNewButton_3.setBounds(123, 10, 162, 54);
+		btnNewButton_3.setBounds(157, 42, 162, 54);
 		contentPane.add(btnNewButton_3);
+		
+		JLabel lblNewLabel = new JLabel("Shift Management ");
+		lblNewLabel.setBounds(190, 0, 263, 54);
+		contentPane.add(lblNewLabel);
 	}
-
 }

@@ -13,6 +13,8 @@ import db.DataAccessException;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
@@ -95,6 +97,7 @@ public class CalculateHours extends JFrame {
 			} catch (DataAccessException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Wrong input, try again");
 			}
 			
 			

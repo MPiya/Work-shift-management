@@ -24,6 +24,8 @@ import java.awt.Panel;
 import java.awt.Button;
 import java.awt.Canvas;
 import javax.swing.JMenu;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,6 +78,7 @@ public class SetShiftGUI  extends JFrame {
 	 */
 	public SetShiftGUI() throws SQLException {
 		selectAll = DBConnection.getInstance().getConnection().prepareStatement(selectAllQ); 
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 864, 520);
 		contentPane = new JPanel();
@@ -122,6 +125,7 @@ public class SetShiftGUI  extends JFrame {
 				} catch (DataAccessException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Wrong input, try again");
 				}
 				
 
@@ -165,12 +169,14 @@ public class SetShiftGUI  extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
+					
 					ResultSet rs = selectAll.executeQuery();
 					ResultSetMetaData rsmd = rs.getMetaData();
 					DefaultTableModel model= (DefaultTableModel) tblData.getModel();
 					int column = rsmd.getColumnCount();
 					String[] colName = new String[column];
-					
+					// setRowCount(0) is to reset the row, so when someone click the Display button, it wont show the same record over again.
+					model.setRowCount(0);
 					for( int i = 0; i < column; i++) {
 						colName[i]=rsmd.getColumnName(i+1);
 						model.setColumnIdentifiers(colName);

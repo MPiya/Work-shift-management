@@ -24,15 +24,13 @@ public class EmployeeDB implements EmployeeDBIF{
 				.prepareStatement(deleteShift);
 	}
 	
-
-
 public void createEmployeeinDB(String fname, String lname, String address, String phoneno) throws SQLException {
 createEmp.setString(1,fname);
 createEmp.setString(2,lname);
 createEmp.setString(3,address);
 createEmp.setString(4,phoneno);
 createEmp.executeUpdate();
-con.disconnect();
+
    }
 
 public void updatePhoneAndAddress(String address, String phone, int customerID) throws SQLException {
@@ -40,7 +38,7 @@ public void updatePhoneAndAddress(String address, String phone, int customerID) 
 	changeAddressAndPhone.setString(2,phone);
 	changeAddressAndPhone.setInt(3,customerID);
 	changeAddressAndPhone.executeUpdate();
-	con.disconnect();
+	
 }
 
 // The reason  that shift has to be deleted before employee before in there is Employee id column
@@ -50,10 +48,5 @@ public void deleteEmployee(int id) throws SQLException {
 	deleteShiftDB.executeUpdate();
 	deleteEmp.setInt(1, id);
 	deleteEmp.executeUpdate();
-	con.disconnect();
 }
-
-
-
-
 }

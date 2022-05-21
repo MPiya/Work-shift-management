@@ -12,8 +12,10 @@ import model.Shift;
 
 public class ShiftDB implements ShiftDBIF {
 	
-private static final String insertShift = "insert into Shift (StartTime,Endtime,EmployeeID) values ( ?, ?, ?)";
-private static final String deleteShift = "delete from shift where StartTime = ? AND EmployeeID =?   ";
+private static final String insertShift = "insert into Shift (StartTime,Endtime,EmployeeID)"
+		+ " values ( ?, ?, ?)";
+private static final String deleteShift = "delete from shift where StartTime = ?"
+		+ " AND EmployeeID =?   ";
 private static final String selectTotalHourBetweenDates = "select Totalhour from Shift WHERE EmployeeID = ? AND  StartTime "
 		+ " BETWEEN ?  AND  ?";
 
@@ -32,22 +34,22 @@ private  PreparedStatement insertShiftDB, deleteShiftDB, selectTotalhours;
 	}
 					//Set shift with these arguments
 	public void setShift( String startTime, String endTime, int employeeID) throws SQLException {
-	
-		insertShiftDB.setString(1,startTime);
-		insertShiftDB.setString(2,endTime);
-		insertShiftDB.setInt(3,employeeID);
-		insertShiftDB.executeUpdate();
+			insertShiftDB.setString(1,startTime);
+			insertShiftDB.setString(2,endTime);
+			insertShiftDB.setInt(3,employeeID);
+			insertShiftDB.executeUpdate();
 		
-		System.out.println("Shift is set");
+		
 		
 	}
 	
 	public void deleteShift(String deleteWantedTime, int customerID) throws SQLException {
 		deleteShiftDB.setString(1,deleteWantedTime );
 		deleteShiftDB.setInt(2,customerID);
+		deleteShiftDB.executeUpdate();
 	}
 	
-	// calculate total between dates interval, this is the algorithm with good complexity to calculate hours which is O(n)
+	// calculate total between dates interval, this is the algorithm with good complexity to calculate hours and Time Complexity is O(n)
 	public  int calculateTotalHoursBetweenDates(int id, String day0, String day1) throws SQLException, DataAccessException {
 		int totalHour = 0;
 		try {
@@ -56,7 +58,6 @@ private  PreparedStatement insertShiftDB, deleteShiftDB, selectTotalhours;
 			selectTotalhours.setString(3, day1);
 			ResultSet rs = selectTotalhours.executeQuery();
 			while(rs.next()) {
-				
 				totalHour += rs.getInt("Totalhour");
 				}
 			System.out.println("Total work hours from employee id " + id + " between dates "
