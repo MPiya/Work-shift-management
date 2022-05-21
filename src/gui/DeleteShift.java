@@ -18,12 +18,14 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class DeleteShift extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtInsertDate;
 	private JTextField txtInsertEmployeeId;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -97,5 +99,10 @@ public class DeleteShift extends JFrame {
 		});
 		btnNewButton_1.setBounds(10, 212, 85, 21);
 		contentPane.add(btnNewButton_1);
+		
+		lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Bon\\Desktop\\SemesterProject\\RW.JPG"));
+		lblNewLabel_1.setBounds(0, 0, 436, 263);
+		contentPane.add(lblNewLabel_1);
 	}
 }

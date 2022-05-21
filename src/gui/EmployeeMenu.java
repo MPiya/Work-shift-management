@@ -25,6 +25,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Panel;
+import java.awt.Label;
 
 public class EmployeeMenu extends JFrame {
 	
@@ -73,7 +77,7 @@ public class EmployeeMenu extends JFrame {
 		selectAll = DBConnection.getInstance().getConnection().prepareStatement(selectAllE); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setBounds(100, 100, 599, 652);
+		setBounds(100, 100, 637, 652);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -98,10 +102,11 @@ public class EmployeeMenu extends JFrame {
 		txtInsertAddress.setColumns(10);
 		
 		txtInsertPhoneNumber = new JTextField();
+		txtInsertPhoneNumber.setHorizontalAlignment(SwingConstants.LEFT);
 		txtInsertPhoneNumber.setText("Insert phone number");
-		txtInsertPhoneNumber.setBounds(10, 171, 111, 19);
+		txtInsertPhoneNumber.setBounds(10, 171, 119, 19);
 		contentPane.add(txtInsertPhoneNumber);
-		txtInsertPhoneNumber.setColumns(10);
+		txtInsertPhoneNumber.setColumns(9);
 		
 		JButton btnNewButton = new JButton("Create Customer");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -125,12 +130,13 @@ public class EmployeeMenu extends JFrame {
 			
 			}
 		});
-		btnNewButton.setBounds(10, 211, 111, 26);
+		btnNewButton.setBounds(10, 211, 133, 30);
 		contentPane.add(btnNewButton);
 		
 		txtInsertEmployeeId = new JTextField();
-		txtInsertEmployeeId.setText("Insert Employee ID that want to be deleted ");
-		txtInsertEmployeeId.setBounds(289, 68, 177, 74);
+		txtInsertEmployeeId.setHorizontalAlignment(SwingConstants.CENTER);
+		txtInsertEmployeeId.setText("Insert Id");
+		txtInsertEmployeeId.setBounds(369, 58, 85, 47);
 		contentPane.add(txtInsertEmployeeId);
 		txtInsertEmployeeId.setColumns(10);
 		
@@ -153,36 +159,36 @@ public class EmployeeMenu extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(281, 211, 138, 26);
+		btnNewButton_1.setBounds(351, 127, 138, 26);
 		contentPane.add(btnNewButton_1);
 		
 		lblNewLabel = new JLabel("Create Employee");
-		lblNewLabel.setBounds(10, 24, 96, 24);
+		lblNewLabel.setBounds(10, 24, 133, 24);
 		contentPane.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("Delete Employee");
-		lblNewLabel_1.setBounds(303, 18, 83, 36);
+		lblNewLabel_1.setBounds(375, 18, 130, 36);
 		contentPane.add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("Employee Menu");
-		lblNewLabel_2.setBounds(146, -12, 96, 47);
+		lblNewLabel_2.setBounds(188, -13, 96, 47);
 		contentPane.add(lblNewLabel_2);
 		
 		txtInsertAddress_1 = new JTextField();
 		txtInsertAddress_1.setText("Insert address");
-		txtInsertAddress_1.setBounds(146, 58, 132, 19);
+		txtInsertAddress_1.setBounds(173, 58, 132, 39);
 		contentPane.add(txtInsertAddress_1);
 		txtInsertAddress_1.setColumns(10);
 		
 		txtInsertP = new JTextField();
 		txtInsertP.setText("Insert phone number");
-		txtInsertP.setBounds(146, 87, 131, 34);
+		txtInsertP.setBounds(174, 107, 131, 34);
 		contentPane.add(txtInsertP);
 		txtInsertP.setColumns(10);
 		
 		txtInsertEmployeeId_1 = new JTextField();
 		txtInsertEmployeeId_1.setText("Insert Employee ID");
-		txtInsertEmployeeId_1.setBounds(148, 131, 131, 41);
+		txtInsertEmployeeId_1.setBounds(174, 151, 131, 41);
 		contentPane.add(txtInsertEmployeeId_1);
 		txtInsertEmployeeId_1.setColumns(10);
 		
@@ -206,11 +212,11 @@ public class EmployeeMenu extends JFrame {
 			
 			}
 		});
-		btnNewButton_2.setBounds(131, 211, 125, 26);
+		btnNewButton_2.setBounds(173, 213, 125, 26);
 		contentPane.add(btnNewButton_2);
 		
-		lblNewLabel_3 = new JLabel("Change address and phone number");
-		lblNewLabel_3.setBounds(108, 23, 169, 26);
+		lblNewLabel_3 = new JLabel("Change address & phone number");
+		lblNewLabel_3.setBounds(156, 23, 236, 26);
 		contentPane.add(lblNewLabel_3);
 		
 		btnNewButton_3 = new JButton("Back");
@@ -271,7 +277,11 @@ public class EmployeeMenu extends JFrame {
 		});
 		btnNewButton_4.setBounds(108, 565, 134, 21);
 		contentPane.add(btnNewButton_4);
-	}
 		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Bon\\Desktop\\SemesterProject\\pexels-andreea-ch-1166644.jpg"));
+		lblNewLabel_4.setBounds(0, 0, 623, 626);
+		contentPane.add(lblNewLabel_4);
+	}
 }
 

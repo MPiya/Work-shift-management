@@ -9,11 +9,15 @@ import javax.swing.border.EmptyBorder;
 
 import db.DataAccessException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.UIManager;
+import javax.swing.SwingConstants;
 
 public class MainMenu extends JFrame {
 
@@ -39,6 +43,8 @@ public class MainMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public MainMenu() {
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 547, 312);
 		contentPane = new JPanel();
@@ -92,6 +98,8 @@ public class MainMenu extends JFrame {
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Employee menu");
+		btnNewButton_3.setIcon(null);
+		btnNewButton_3.setForeground(Color.DARK_GRAY);
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -112,5 +120,15 @@ public class MainMenu extends JFrame {
 		JLabel lblNewLabel = new JLabel("Shift Management ");
 		lblNewLabel.setBounds(190, 0, 263, 54);
 		contentPane.add(lblNewLabel);
+		
+		JLabel background;
+		setSize(566,282);
+		getContentPane().setLayout(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		ImageIcon img=new ImageIcon("Background");
+		background=new JLabel("",new ImageIcon("C:\\Users\\Bon\\Desktop\\SemesterProject\\RW.JPG"),JLabel.CENTER);
+		background.setBounds(-19,-160,571,607);
+		getContentPane().add(background);
+		setVisible(true);
 	}
 }

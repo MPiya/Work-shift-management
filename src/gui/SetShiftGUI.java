@@ -37,9 +37,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import db.DBConnection;
+import javax.swing.ImageIcon;
 
 public class SetShiftGUI  extends JFrame {
-	private static final String selectAllQ = "select Employee.FirstName, Employee.LastName, Shift.StartTime, Shift.Endtime, SHIFT.Totalhour,Employee.EmployeeID\r\n"
+	private static final String selectAllQ = "select Employee.EmployeeID, Employee.FirstName, Employee.LastName, Shift.StartTime, Shift.Endtime, SHIFT.Totalhour,Shift.Location\r\n"
 			+ "FROM Shift\r\n"
 			+ "INNER JOIN Employee ON SHIFT.EmployeeID = Employee.EmployeeID";
 	private PreparedStatement selectAll ;
@@ -56,6 +57,8 @@ public class SetShiftGUI  extends JFrame {
 	private JTable tblData;
 	private JButton Shift;
 	private JScrollPane scrollPane_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
 
 	/**
 	 * Launch the application.
@@ -80,7 +83,7 @@ public class SetShiftGUI  extends JFrame {
 		selectAll = DBConnection.getInstance().getConnection().prepareStatement(selectAllQ); 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 864, 520);
+		setBounds(100, 100, 1112, 510);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -151,7 +154,7 @@ public class SetShiftGUI  extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(239, 36, 566, 404);
+		scrollPane_1.setBounds(239, 36, 817, 404);
 		contentPane.add(scrollPane_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -181,7 +184,7 @@ public class SetShiftGUI  extends JFrame {
 						colName[i]=rsmd.getColumnName(i+1);
 						model.setColumnIdentifiers(colName);
 						
-						String a, b,c,d,f,g;
+						String a, b,c,d,f,g,h;
 						while(rs.next()) {
 							a = rs.getString(1);
 							b = rs.getString(2);
@@ -189,7 +192,9 @@ public class SetShiftGUI  extends JFrame {
 							d = rs.getString(4);
 							f = rs.getString(5);
 							g = rs.getString(6);
-							String[] row = {a,b,c,d,f,g};
+							h = rs.getString(7);
+							
+							String[] row = {a,b,c,d,f,g,h};
 							model.addRow(row);
 									}
 					} }
@@ -207,5 +212,15 @@ public class SetShiftGUI  extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Record");
 		lblNewLabel_1.setBounds(471, 10, 45, 13);
 		contentPane.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Bon\\Desktop\\SemesterProject\\RW.JPG"));
+		lblNewLabel_2.setBounds(0, 0, 629, 473);
+		contentPane.add(lblNewLabel_2);
+		
+		lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Bon\\Desktop\\SemesterProject\\RW.JPG"));
+		lblNewLabel_3.setBounds(629, 10, 479, 463);
+		contentPane.add(lblNewLabel_3);
 	}
 }
