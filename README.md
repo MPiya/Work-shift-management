@@ -1,2 +1,2 @@
 # SemesterProject Shiftwork
- Shift
+Work Shift management system developed in Java by Bon aka Mpiya
